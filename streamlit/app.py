@@ -4,11 +4,11 @@ import streamlit as st
 import pickle
 
 # load the train model
-with open('or_model2.pkl', 'rb') as oridge:
+with open('/app/project-2/streamlit/or_model2.pkl', 'rb') as oridge:
     model = pickle.load(oridge)
 
 # load the PowerTransformer
-with open('powertransformer.pkl', 'rb') as pt:
+with open('/app/project-2/streamlit/powertransformer.pkl', 'rb') as pt:
     transformer = pickle.load(pt)
     transformer.set_output(transform="pandas")
 

@@ -2,7 +2,6 @@ pandas
 streamlit
 scikit-learn
 numpy
-json
 folium
 geopandas
 altair

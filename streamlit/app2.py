@@ -17,8 +17,6 @@ import altair as alt
 from streamlit_folium import st_folium, folium_static
 import pickle
 
-# more imports, dictionaries, etc.
-
 # first load the model and transformer
 
 ##this is for local drive##

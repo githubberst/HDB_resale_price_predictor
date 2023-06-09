@@ -88,7 +88,7 @@ types_list = [
     '5 ROOM DBSS',
     '5 ROOM Improved',
     '5 ROOM Improved-Maisonette',
-    '5 ROOM Model A'
+    '5 ROOM Model A',
     '5 ROOM Model A-Maisonette',
     '5 ROOM Premium Apartment',
     '5 ROOM Standard',

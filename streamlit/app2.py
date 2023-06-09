@@ -21,6 +21,24 @@ import pickle
 
 # first load the model and transformer
 
+##this is for local drive##
+# load the train model
+# with open('/Users/sandratan/Desktop/Sandra Copy (GithubGA)/GA projects/Project-2/streamlit/or_model2.pkl', 'rb') as oridge:
+#     model = pickle.load(oridge)
+
+# # load the PowerTransformer
+# with open('/Users/sandratan/Desktop/Sandra Copy (GithubGA)/GA projects/Project-2/streamlit/powertransformer.pkl', 'rb') as pt: 
+#     transformer = pickle.load(pt) 
+#     transformer.set_output(transform="pandas")
+
+# # import data
+# df = pd.read_csv('/Users/sandratan/Desktop/Sandra Copy (GithubGA)/GA projects/Project-2/datasets/train_pop_NaN.csv')
+
+# # import the planning area boundaries
+# with open ('/Users/sandratan/Desktop/Sandra Copy (GithubGA)/GA projects/Project-2/streamlit/master_plan_boundaries.json', 'r') as jsonFile:
+#     town_borders = json.load(jsonFile)    
+
+#this is for cloud deployment (toggle comment on for above when this is in use)##
 # load the train model
 with open('/app/project-2/streamlit/or_model2.pkl', 'rb') as oridge:
     model = pickle.load(oridge)
@@ -30,8 +48,7 @@ with open('/app/project-2/streamlit/powertransformer.pkl', 'rb') as pt:
     transformer = pickle.load(pt) 
     transformer.set_output(transform="pandas")
     
-# import some data
-
+# import  data
 df = pd.read_csv('/app/project-2/datasets/train_pop_NaN.csv')
 
 # import the planning area boundaries
@@ -436,52 +453,42 @@ def predict(floor_area_sqm, tranc_year, mid, hdb_age, max_floor_lvl, total_dwell
     return result
 
 def average_over_time(town):
-     
-     resale_dic = {}
-     resale_town = df.loc[df['town'] ==  str(town)]
-     
-     i = 2012
-     while i < 2022:
-         n = 1
-         while n < 13:
-             if n < 10:
-                 resale_month = resale_town.loc[resale_town['tranc_month'] == n]
-                 resale_month_mean = round(resale_month['resale_price'].mean(),2)
-                 resale_dic[str(i) + '-0' + str(n)] = resale_month_mean
-                 n += 1
-             else:
-                 resale_month = resale_town.loc[resale_town['tranc_month'] == n]
-                 resale_month_mean = round(resale_month['resale_price'].mean(),2)
-                 resale_dic[str(i) + '-' + str(n)] = resale_month_mean
-                 n += 1
-         i += 1
-         
-     
+    resale_dic = {}
+    resale_town = df.loc[df['town'] == str(town)]
+    
+    i = 2012
+    while i < 2022:
+        resale_year = resale_town.loc[resale_town['tranc_year'] == i]
+        resale_year_mean = round(resale_year['resale_price'].mean(), 2)
+        resale_dic[str(i)] = resale_year_mean
+        i += 1
+    
+      
      # filter off the NaN values inside the dic prior to sepearting them into lists 
-     for key,value in resale_dic.items():
+    for key,value in resale_dic.items():
          if np.isnan(value) == True:
              del resale_dic[key]
              break
      
-     # reindexing all the months + need the months for plotting
-     # seperating the key value pairs into list for annotation
-     resale_dic_key = list(resale_dic.keys())
-     resale_dic_value = list(resale_dic.values())
-     
-     x = resale_dic_key
-     
-     # creating df to transfer them into altair
-     source = pd.DataFrame({
-         'Time': x,
-         'Average Resale Price': resale_dic_value})
-     
-     # creating linegraph map using Altair.
-     # hardcoding the axis scale for Y so that they all have the same scale
-     a = alt.Chart(source,title= f'Average HDB Resale Price Of {town}').mark_line().encode( alt.X('Time:T'),
-         y= alt.Y('Average Resale Price', scale=alt.Scale(domain=[300000, 900000]))
-     ).properties(width = 300, height = 260) #remember 300 x300!
-     
-     return a 
+    # reindexing all the months + need the months for plotting
+    # seperating the key value pairs into list for annotation
+    resale_dic_key = list(resale_dic.keys())
+    resale_dic_value = list(resale_dic.values())
+    
+    x = resale_dic_key
+    
+    # creating df to transfer them into altair
+    source = pd.DataFrame({
+        'Time': x,
+        'Average Resale Price': resale_dic_value})
+    
+    # creating linegraph map using Altair.
+    # hardcoding the axis scale for Y so that they all have the same scale
+    a = alt.Chart(source,title= f'Average HDB Resale Price Of {town}').mark_line().encode( alt.X('Time:T'),
+        y= alt.Y('Average Resale Price', scale=alt.Scale(domain=[300000, 900000]))
+    ).properties(width = 300, height = 260) #remember 300 x300!
+    
+    return a 
  
 # markers function implemented into the graph
 def markers(df3, m):
@@ -502,5 +509,4 @@ def markers(df3, m):
 if __name__ == '__main__':
     main()
     
-    
-
+   

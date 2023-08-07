@@ -114,7 +114,7 @@ From Kaggle (https://www.kaggle.com/competitions/dsi-sg-project-2-regression-cha
 
 1. To maximise commissions for the least effort, the agency may wish to leverage the prediction model and consider different strategies at the town, neighbourhood and block/unit levels. 
 
-2. Emphasise on positive features during pitch to prospective sellers and buyers (i.e. maximising buyers/sellers’ returns) - consider a simple and user-friendly tool for prospective clients to play around with (try this at https://githubberst-project-2-streamlitapp2-856hmn.streamlit.app/)
+2. Emphasise on positive features during pitch to prospective sellers and buyers (i.e. maximising buyers/sellers’ returns) - consider a simple and user-friendly tool for prospective clients to play around with (try this at https://resalepricepredictor.streamlit.app/) 
 
 3. Regularly provide content on features of interest (e.g. electronic direct mail, news and articles) to prospective clients
 

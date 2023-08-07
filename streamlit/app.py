@@ -48,23 +48,15 @@ from pathlib import Path
 #     town_borders = json.load(jsonFile)    
     
 
-# Define the base path
-base_path = Path('/app/project_HDB_resale_price_predictor')
+# Define the import paths
+model_path = Path(__file__).parent / 'streamlit/or_model2.pkl'
+transformer_path = Path(__file__).parent / 'streamlit/powertransformer.pkl'
+train_path = Path(__file__).parent / 'datasets/train_pop_NaN.csv'
+json_path = Path(__file__).parent / 'streamlit/master_plan_boundaries.json'
 
-# Load the trained model
-with open(base_path / 'streamlit/or_model2.pkl', 'rb') as oridge:
-    model = pickle.load(oridge)
-
-# Load the PowerTransformer
-with open(base_path / 'streamlit/powertransformer.pkl', 'rb') as pt: 
-    transformer = pickle.load(pt) 
-    transformer.set_output(transform="pandas")
-    
-# Import data
-df = pd.read_csv(base_path / 'datasets/train_pop_NaN.csv')
 
 # Import the planning area boundaries
-with open(base_path / 'streamlit/master_plan_boundaries.json', 'r') as jsonFile:
+with open(json_path, 'r') as jsonFile:
     town_borders = json.load(jsonFile)
 
 

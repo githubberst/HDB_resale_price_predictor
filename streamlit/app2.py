@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jun  6 07:55:43 2023
-
-@author: wynne
-"""
-
 # imports
 import streamlit as st
 import pandas as pd
@@ -16,6 +8,8 @@ import geopandas as gpd
 import altair as alt
 from streamlit_folium import st_folium, folium_static
 import pickle
+from pathlib import Path
+
 
 # first load the model and transformer
 
@@ -37,22 +31,44 @@ import pickle
 #     town_borders = json.load(jsonFile)    
 
 #this is for cloud deployment (toggle comment on for above when this is in use)##
-# load the train model
-with open('/app/project-2/streamlit/or_model2.pkl', 'rb') as oridge:
+# # load the train model
+# with open('/app/project-2/streamlit/or_model2.pkl', 'rb') as oridge:
+#     model = pickle.load(oridge)
+
+# # load the PowerTransformer
+# with open('/app/project-2/streamlit/powertransformer.pkl', 'rb') as pt: 
+#     transformer = pickle.load(pt) 
+#     transformer.set_output(transform="pandas")
+    
+# # import  data
+# df = pd.read_csv('/app/project-2/datasets/train_pop_NaN.csv')
+
+# # import the planning area boundaries
+# with open ('/app/project-2/streamlit/master_plan_boundaries.json', 'r') as jsonFile:
+#     town_borders = json.load(jsonFile)    
+    
+
+# Define the base path
+base_path = Path('/app/project_HDB_resale_price_predictor')
+
+# Load the trained model
+with open(base_path / 'streamlit/or_model2.pkl', 'rb') as oridge:
     model = pickle.load(oridge)
 
-# load the PowerTransformer
-with open('/app/project-2/streamlit/powertransformer.pkl', 'rb') as pt: 
+# Load the PowerTransformer
+with open(base_path / 'streamlit/powertransformer.pkl', 'rb') as pt: 
     transformer = pickle.load(pt) 
     transformer.set_output(transform="pandas")
     
-# import  data
-df = pd.read_csv('/app/project-2/datasets/train_pop_NaN.csv')
+# Import data
+df = pd.read_csv(base_path / 'datasets/train_pop_NaN.csv')
 
-# import the planning area boundaries
-with open ('/app/project-2/streamlit/master_plan_boundaries.json', 'r') as jsonFile:
-    town_borders = json.load(jsonFile)    
-    
+# Import the planning area boundaries
+with open(base_path / 'streamlit/master_plan_boundaries.json', 'r') as jsonFile:
+    town_borders = json.load(jsonFile)
+
+
+
 
 # some definitions and dictionaries
 

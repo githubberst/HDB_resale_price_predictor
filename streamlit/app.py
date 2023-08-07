@@ -31,7 +31,6 @@ from pathlib import Path
 #     town_borders = json.load(jsonFile)    
 
 #this is for cloud deployment (toggle comment on for above when this is in use)##
-<<<<<<< HEAD
 # # load the train model
 # with open('/app/project-2/streamlit/or_model2.pkl', 'rb') as oridge:
 #     model = pickle.load(oridge)
@@ -68,26 +67,6 @@ df = pd.read_csv(base_path / 'datasets/train_pop_NaN.csv')
 with open(base_path / 'streamlit/master_plan_boundaries.json', 'r') as jsonFile:
     town_borders = json.load(jsonFile)
 
-
-
-=======
-# load the train model
-with open('/app/project_HDB_resale_price_predictor/streamlit/or_model2.pkl', 'rb') as oridge:
-    model = pickle.load(oridge)
-
-# load the PowerTransformer
-with open('/app/project_HDB_resale_price_predictor/streamlit/powertransformer.pkl', 'rb') as pt: 
-    transformer = pickle.load(pt) 
-    transformer.set_output(transform="pandas")
-    
-# import  data
-df = pd.read_csv('/app/project_HDB_resale_price_predictor/datasets/train_pop_NaN.csv')
-
-# import the planning area boundaries
-with open ('/app/project_HDB_resale_price_predictor/streamlit/master_plan_boundaries.json', 'r') as jsonFile:
-    town_borders = json.load(jsonFile)    
-    
->>>>>>> 8bae6a25514ab1dcb8a90fccba053dd504d575c4
 
 # some definitions and dictionaries
 

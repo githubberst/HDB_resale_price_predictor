@@ -51,7 +51,7 @@ from pathlib import Path
 # Define the import paths
 model_path = Path(__file__).parent / 'or_model2.pkl'
 transformer_path = Path(__file__).parent / 'powertransformer.pkl'
-train_path = Path(__file__).parent / './datasets/train_pop_NaN.csv'
+train_path = Path(__file__).parent / '../datasets/train_pop_NaN.csv'
 json_path = Path(__file__).parent / 'master_plan_boundaries.json'
 
 # load the train model

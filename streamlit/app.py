@@ -49,11 +49,22 @@ from pathlib import Path
     
 
 # Define the import paths
-model_path = Path(__file__).parent / 'streamlit/or_model2.pkl'
-transformer_path = Path(__file__).parent / 'streamlit/powertransformer.pkl'
-train_path = Path(__file__).parent / 'datasets/train_pop_NaN.csv'
+model_path = Path(__file__).parent / 'or_model2.pkl'
+transformer_path = Path(__file__).parent / 'powertransformer.pkl'
+train_path = Path(__file__).parent / './datasets/train_pop_NaN.csv'
 json_path = Path(__file__).parent / 'master_plan_boundaries.json'
 
+# load the train model
+with open(model_path, 'rb') as oridge:
+    model = pickle.load(oridge)
+
+# load the PowerTransformer
+with open(transformer_path, 'rb') as pt: 
+    transformer = pickle.load(pt) 
+    transformer.set_output(transform="pandas")
+    
+# import  data
+df = pd.read_csv(train_path)
 
 # Import the planning area boundaries
 with open(json_path, 'r') as jsonFile:

@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jun  6 07:55:43 2023
-
-@author: wynne
-"""
-
 # imports
 import streamlit as st
 import pandas as pd
@@ -38,19 +30,19 @@ import pickle
 
 #this is for cloud deployment (toggle comment on for above when this is in use)##
 # load the train model
-with open('/app/project-2/streamlit/or_model2.pkl', 'rb') as oridge:
+with open('/app/project_HDB_resale_price_predictor/streamlit/or_model2.pkl', 'rb') as oridge:
     model = pickle.load(oridge)
 
 # load the PowerTransformer
-with open('/app/project-2/streamlit/powertransformer.pkl', 'rb') as pt: 
+with open('/app/project_HDB_resale_price_predictor/streamlit/powertransformer.pkl', 'rb') as pt: 
     transformer = pickle.load(pt) 
     transformer.set_output(transform="pandas")
     
 # import  data
-df = pd.read_csv('/app/project-2/datasets/train_pop_NaN.csv')
+df = pd.read_csv('/app/project_HDB_resale_price_predictor/datasets/train_pop_NaN.csv')
 
 # import the planning area boundaries
-with open ('/app/project-2/streamlit/master_plan_boundaries.json', 'r') as jsonFile:
+with open ('/app/project_HDB_resale_price_predictor/streamlit/master_plan_boundaries.json', 'r') as jsonFile:
     town_borders = json.load(jsonFile)    
     
 

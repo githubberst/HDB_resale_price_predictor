@@ -52,7 +52,7 @@ from pathlib import Path
 model_path = Path(__file__).parent / 'streamlit/or_model2.pkl'
 transformer_path = Path(__file__).parent / 'streamlit/powertransformer.pkl'
 train_path = Path(__file__).parent / 'datasets/train_pop_NaN.csv'
-json_path = Path(__file__).parent / 'streamlit/master_plan_boundaries.json'
+json_path = Path(__file__).parent / 'master_plan_boundaries.json'
 
 
 # Import the planning area boundaries
